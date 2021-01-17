@@ -53,6 +53,35 @@ Three methods of feature selection are tested:
 2. Wrapper method: Recursive feature elimination (selected 8 features)
 3. Embedded method: Lasso regression (selected 8 features)
 
+The ROC-AUC from validation/test set is compared here
+
+|              | Baseline | Pearson correlation | Pearson corr. remove multi-collinearity | REA   | Lasso regression |
+|--------------|----------|---------------------|-----------------------------------------|-------|------------------|
+| SMOTE+RUD    | 0.746    | 0.811               | 0.781                                   | 0.835 | 0.838            |
+| Class weight | 0.759    | 0.842               | 0.796                                   | 0.836 | 0.835            |
+
+
+### Different modeling algorithms are tuned and compared in the following 2 tables.
+### ROC-AUC and weighted F1 are compared:
+|                     | Default |             | Hyperparameter tuning |             |
+|---------------------|---------|-------------|-----------------------|-------------|
+|                     | ROC-AUC | Weighted F1 | ROC-AUC               | Weighted F1 |
+| Logistic regression | 0.842   | 0.917       | N/A                   | N/A         |
+| Random forest       | 0.835   | 0.947       | 0.839                 | 0.920       |
+| XGBoost             | 0.839   | 0.950       | 0.836                 | 0.951       |
+
+### Fraud precision and recall are compared:
+
+|                     | Default         |              | Hyperparameter tuning |              |
+|---------------------|-----------------|--------------|-----------------------|--------------|
+|                     | Fraud precision | Fraud recall | Fraud precision       | Fraud recall |
+| Logistic regression | 0.518           | 0.706        | N/A                   | N/A          |
+| Random forest       | 0.928           | 0.541        | 0.534                 | 0.705        |
+| XGBoost             | 0.980           | 0.537        | 0.999                 | 0.535        |
+
+1. Based on the modeling tests, the best ROC-AUC achieved is around 0.84, and weighted F1 around 0.951.
+2. The threshold could be further tuned depending on the specific business objective, either we should emphasize on the precision more or the recall.
+
 Modeling – feature importance
 Feature rank summary from the modeling*:
 
